@@ -29,13 +29,22 @@ export default {
   name: 'App',
   data () {
     return {
-      tasks: [
-        { id: 0, title: 'Todo1', completed: false },
-        { id: 1, title: 'Todo2', completed: false },
-        { id: 2, title: 'Todo3', completed: false }
-      ],
+      tasks: [],
       deleted: []
     }
+  },
+  mounted () {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(response => response.json())
+      .then(json => {
+        this.tasks = json
+      })
+  },
+  beforeUpdate () {
+    const tasks = this.tasks
+    tasks.forEach(el => {
+      el.completed = false
+    })
   },
   methods: {
     taskToEnd (task) {
@@ -45,6 +54,7 @@ export default {
     addTask (task) {
       task.id = this.tasks.length
       this.tasks.push(task)
+      console.log(this.tasks)
     }
   },
   components: {
@@ -71,7 +81,9 @@ export default {
 
 .app__section--main {
   max-width: 640px;
+  height: 636px;
   padding: 38px 18px 37px 16px;
+  overflow-y: scroll;
 }
 
 .app__title {

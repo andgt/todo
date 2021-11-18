@@ -34,6 +34,10 @@ export default {
     justify-content: space-between;
   }
 
+  .app__item-title {
+    max-width: 200px;
+  }
+
   .task__range-field {
     width: 66px;
     height: 33px;
@@ -78,5 +82,11 @@ export default {
 
   .task__done {
     background-color: rgba(0, 179, 219, 0.12);
+  }
+
+  @media (min-width: 768px) {
+    .app__item-title {
+      max-width: 400px;
+    }
   }
 </style>
