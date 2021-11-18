@@ -1,6 +1,9 @@
 <template>
   <div class="app" id="app">
     <h1 class="app__title">Todo App</h1>
+    <AddTask
+      @add-task="addTask"
+    />
     <section class="app__section app__section--main">
       <h2 class="app__subtitle">My todos</h2>
       <TodoSearch/>
@@ -17,6 +20,7 @@
 </template>
 
 <script>
+import AddTask from '@/components/addtask'
 import TodoSearch from '@/components/todosearch'
 import Breadcrumbs from '@/components/breadcrumbs'
 import Todolist from '@/components/todolist'
@@ -26,9 +30,9 @@ export default {
   data () {
     return {
       tasks: [
-        { id: 1, title: 'Todo1', completed: false },
-        { id: 2, title: 'Todo2', completed: false },
-        { id: 3, title: 'Todo3', completed: false }
+        { id: 0, title: 'Todo1', completed: false },
+        { id: 1, title: 'Todo2', completed: false },
+        { id: 2, title: 'Todo3', completed: false }
       ],
       deleted: []
     }
@@ -37,9 +41,14 @@ export default {
     taskToEnd (task) {
       this.deleted.push(task)
       this.tasks = this.tasks.filter(el => el !== task)
+    },
+    addTask (task) {
+      task.id = this.tasks.length
+      this.tasks.push(task)
     }
   },
   components: {
+    AddTask,
     TodoSearch,
     Breadcrumbs,
     Todolist,
@@ -84,6 +93,16 @@ export default {
   .app__title {
     font-size: 45px;
     line-height: 53px;
+  }
+
+  .app__section--add {
+    max-width: 518px;
+    padding: 32px 29px 31px 33px;
+  }
+
+  .form-add__input-wrapper {
+    flex-grow: 1;
+    max-width:456px;
   }
 }
 </style>
