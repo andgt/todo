@@ -1,6 +1,6 @@
 <template>
 <div>
-  <ul class="app__list">
+  <ul class="app__list app__list--tasks">
     <TodoItem
       v-for="task of tasks"
       :key="task.title"
@@ -19,8 +19,8 @@ export default {
     TodoItem
   },
   methods: {
-    taskToEnd (id) {
-      this.$emit('task-to-end', id)
+    taskToEnd (task) {
+      this.$emit('task-to-end', task)
     }
   }
 }
@@ -35,5 +35,8 @@ export default {
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+  .app__list--tasks {
+    margin-bottom: 4px;
   }
 </style>

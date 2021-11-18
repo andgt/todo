@@ -1,9 +1,9 @@
 <template>
   <li class="app__item">
     <div class="app__item-inner">
-      <span class="app__item-title">{{task.title}}</span>
+      <span class="app__item-title">{{del.title}}</span>
       <fieldset class="task__range-field">
-        <input class="task__range" v-on:click="$emit('task-to-end', task)" v-on:change="task.completed = !task.completed" v-bind:class="{task__done: task.completed}" type="range" name="taskrange" id="rangeTask" min="1" max="2" step="1" value="1" aria-label="task-toggle">
+        <input class="task__range task__done" type="range" name="taskrange" id="rangeTask" min="1" max="2" step="1" value="2" aria-label="task-toggle">
       </fieldset>
     </div>
   </li>
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    task: {
+    del: {
       type: Object,
       required: true
     }

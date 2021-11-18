@@ -9,6 +9,9 @@
         v-bind:tasks="tasks "
         @task-to-end="taskToEnd"
       />
+      <DeletedTasks
+        v-bind:deleted="deleted"
+      />
     </section>
   </div>
 </template>
@@ -17,26 +20,30 @@
 import TodoSearch from '@/components/todosearch'
 import Breadcrumbs from '@/components/breadcrumbs'
 import Todolist from '@/components/todolist'
+import DeletedTasks from '@/components/deletedtasks'
 export default {
   name: 'App',
   data () {
     return {
       tasks: [
-        { id: 1, title: 'Learn Vue', completed: false },
-        { id: 2, title: 'Learn Webpack', completed: false },
-        { id: 3, title: 'Read book', completed: false }
-      ]
+        { id: 1, title: 'Todo1', completed: false },
+        { id: 2, title: 'Todo2', completed: false },
+        { id: 3, title: 'Todo3', completed: false }
+      ],
+      deleted: []
     }
   },
   methods: {
-    taskToEnd (id) {
-      this.tasks = this.tasks.filter(t => t.id !== id)
+    taskToEnd (task) {
+      this.deleted.push(task)
+      this.tasks = this.tasks.filter(el => el !== task)
     }
   },
   components: {
     TodoSearch,
     Breadcrumbs,
-    Todolist
+    Todolist,
+    DeletedTasks
   }
 }
 </script>
