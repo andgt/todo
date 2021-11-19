@@ -3,7 +3,7 @@
     <div class="app__item-inner">
       <span class="app__item-title">{{del.title}}</span>
       <fieldset class="task__range-field">
-        <input class="task__range task__done" type="range" name="taskrange" id="rangeTask" min="1" max="2" step="1" value="2" aria-label="task-toggle">
+        <input class="task__range task__done" type="range" name="taskrange" min="1" max="2" step="1" value="2" aria-label="task-toggle">
       </fieldset>
     </div>
   </li>

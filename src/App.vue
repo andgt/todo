@@ -7,13 +7,20 @@
     <section class="app__section app__section--main">
       <h2 class="app__subtitle">My todos</h2>
       <TodoSearch/>
-      <Breadcrumbs/>
+      <FilterTasks
+        v-bind:filterInputs="filterInputs"
+        @filtering="filtering"
+      />
       <Todolist
+        v-show="chooseTasks==='true'"
+        v-if="tasks.length"
         v-bind:tasks="tasks "
         @task-to-end="taskToEnd"
       />
+      <p class="app__no-task" v-else>No active tasks</p>
       <DeletedTasks
         v-bind:deleted="deleted"
+        v-show="chooseDeleted==='true'"
       />
     </section>
   </div>
@@ -22,19 +29,26 @@
 <script>
 import AddTask from '@/components/addtask'
 import TodoSearch from '@/components/todosearch'
-import Breadcrumbs from '@/components/breadcrumbs'
+import FilterTasks from '@/components/filtertasks'
 import Todolist from '@/components/todolist'
 import DeletedTasks from '@/components/deletedtasks'
 export default {
   name: 'App',
   data () {
     return {
+      chooseTasks: 'true',
+      chooseDeleted: 'true',
       tasks: [],
-      deleted: []
+      deleted: [],
+      filterInputs: [
+        { title: 'Все', active: true },
+        { title: 'Выполненные', active: false },
+        { title: 'Невыполненные', active: false }
+      ]
     }
   },
   mounted () {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
       .then(json => {
         this.tasks = json
@@ -54,13 +68,35 @@ export default {
     addTask (task) {
       task.id = this.tasks.length
       this.tasks.push(task)
-      console.log(this.tasks)
+    },
+    filtering (filterInput) {
+      const inputs = this.filterInputs
+      inputs.forEach(el => {
+        el.active = false
+      })
+      filterInput.active = !filterInput.active
+
+      if (filterInput.active === true) {
+        if (filterInput.title === 'Выполненные') {
+          this.chooseTasks = false
+        } else {
+          this.chooseTasks = 'true'
+        }
+      }
+
+      if (filterInput.active === true) {
+        if (filterInput.title === 'Невыполненные') {
+          this.chooseDeleted = false
+        } else {
+          this.chooseDeleted = 'true'
+        }
+      }
     }
   },
   components: {
     AddTask,
     TodoSearch,
-    Breadcrumbs,
+    FilterTasks,
     Todolist,
     DeletedTasks
   }
@@ -87,7 +123,7 @@ export default {
 }
 
 .app__title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 30px;
   line-height: 35px;
   text-align: left;
@@ -96,9 +132,16 @@ export default {
 
 .app__subtitle {
   margin: 0 0 25px 0;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 20px;
   line-height: 23px;
+}
+
+.app__no-task {
+  margin: 0 0 30px 0;
+  padding: 0 0 0 20px;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 @media (min-width: 768px) {

@@ -3,7 +3,7 @@
     <div class="app__item-inner">
       <span class="app__item-title">{{task.title}}</span>
       <fieldset class="task__range-field">
-        <input class="task__range" v-on:click="$emit('task-to-end', task)" v-on:change="task.completed = !task.completed" v-bind:class="{task__done: task.completed}" type="range" name="taskrange" id="rangeTask" min="1" max="2" step="1" value="1" aria-label="task-toggle">
+        <input class="task__range" v-on:click="$emit('task-to-end', task)" v-on:change="task.completed = !task.completed" v-bind:class="{task__done: task.completed}" type="range" name="taskrange" min="1" max="2" step="1" value="1" aria-label="task-toggle">
       </fieldset>
     </div>
   </li>
