@@ -38,6 +38,7 @@ export default {
     return {
       chooseTasks: 'true',
       chooseDeleted: 'true',
+      todos: [],
       tasks: [],
       deleted: [],
       filterInputs: [
@@ -51,23 +52,67 @@ export default {
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
       .then(json => {
-        this.tasks = json
+        this.todos = json
+        localStorage.setItem('tasksLocal', JSON.stringify(this.todos))
+
+        const dataActive = localStorage.getItem('tasksLocal')
+        const dataDeleted = localStorage.getItem('deletedLocal')
+
+        const parseActive = JSON.parse(dataActive)
+        const parseDeleted = JSON.parse(dataDeleted)
+
+        this.tasks = parseActive
+        const tasksActive = this.tasks
+        let count = 0
+
+        for (let i = 0; i < tasksActive.length; i++) {
+          if (dataDeleted) {
+            this.deleted = parseDeleted
+            const tasksDeleted = this.deleted
+            for (let j = 0; j < tasksDeleted.length; j++) {
+              if (tasksActive[i].id === tasksDeleted[j].id) {
+                count--
+                tasksActive[i].userId = count
+              }
+            }
+          } else {
+            return null
+          }
+        } return tasksActive
       })
   },
   beforeUpdate () {
     const tasks = this.tasks
+    tasks.sort(function (a, b) {
+      if (a.userId < b.userId) {
+        return -1
+      }
+    })
+
+    let countId = 0
+
     tasks.forEach(el => {
       el.completed = false
+
+      if (el.userId < 0) {
+        countId++
+      }
     })
+
+    tasks.splice(0, countId)
   },
   methods: {
     taskToEnd (task) {
       this.deleted.push(task)
       this.tasks = this.tasks.filter(el => el !== task)
+
+      localStorage.setItem('deletedLocal', JSON.stringify(this.deleted))
+      localStorage.setItem('tasksLocal', JSON.stringify(this.tasks))
     },
     addTask (task) {
-      task.id = this.tasks.length
+      task.userId = 1
       this.tasks.push(task)
+      localStorage.setItem('tasksLocal', JSON.stringify(this.tasks))
     },
     filtering (filterInput) {
       const inputs = this.filterInputs
