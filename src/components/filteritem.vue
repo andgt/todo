@@ -30,7 +30,7 @@ export default {
   .filter__wrapper:not(:last-child)::before {
     content: "/";
     position: absolute;
-    top: 5px;
+    top: 0;
     right: 0;
     width: 6px;
     height: auto;
@@ -39,8 +39,8 @@ export default {
   }
 
   .filter__button {
-    font-size: 15px;
-    line-height: 25px;
+    font-size: 12px;
+    line-height: 18px;
     border: 0;
     background-color: transparent;
     cursor: pointer;
@@ -48,8 +48,17 @@ export default {
 
   .filter__active {
     font-weight: 700;
-    font-size: 15px;
-    line-height: 25px;
     color: #00b3db;
+  }
+
+  @media (min-width: 768px) {
+    .filter__button {
+      font-size: 15px;
+      line-height: 25px;
+    }
+
+    .filter__wrapper:not(:last-child)::before {
+      top: 5px;
+    }
   }
 </style>

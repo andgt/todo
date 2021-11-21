@@ -31,12 +31,18 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    max-width: 574px;
+    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
   }
   .app__list--tasks {
     margin-bottom: 4px;
+  }
+
+  @media (min-width: 1440px) {
+    .app__list {
+      max-width: 574px;
+    }
   }
 </style>

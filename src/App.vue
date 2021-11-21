@@ -1,28 +1,34 @@
 <template>
-  <div class="app" id="app">
+  <div class="app container" id="app">
     <h1 class="app__title">Todo App</h1>
-    <AddTask
-      @add-task="addTask"
-    />
-    <section class="app__section app__section--main">
-      <h2 class="app__subtitle">My todos</h2>
-      <TodoSearch/>
-      <FilterTasks
-        v-bind:filterInputs="filterInputs"
-        @filtering="filtering"
+    <div class="main__block">
+      <AddTask
+        @add-task="addTask"
       />
-      <Todolist
-        v-show="chooseTasks==='true'"
-        v-if="tasks.length"
-        v-bind:tasks="tasks "
-        @task-to-end="taskToEnd"
-      />
-      <p class="app__no-task" v-else>No active tasks</p>
-      <DeletedTasks
-        v-bind:deleted="deleted"
-        v-show="chooseDeleted==='true'"
-      />
-    </section>
+      <div class="app__section__inner">
+        <section class="app__section app__section--main">
+          <div class="app__list-header">
+            <h2 class="app__subtitle app__subtitle--list">My todos</h2>
+            <TodoSearch/>
+          </div>
+          <FilterTasks
+            v-bind:filterInputs="filterInputs"
+            @filtering="filtering"
+          />
+          <Todolist
+            v-show="chooseTasks==='true'"
+            v-if="tasks.length"
+            v-bind:tasks="tasks "
+            @task-to-end="taskToEnd"
+          />
+          <p class="app__no-task" v-else>No active tasks</p>
+          <DeletedTasks
+            v-bind:deleted="deleted"
+            v-show="chooseDeleted==='true'"
+          />
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,7 +55,7 @@ export default {
     }
   },
   mounted () {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=25')
       .then(response => response.json())
       .then(json => {
         this.todos = json
@@ -148,31 +154,51 @@ export default {
 }
 </script>
 
+<style>
+  @import './assets/css/main.css';
+</style>
+
 <style scoped>
-.app {
-  font-family: "Roboto", "Arial", sans-serif;
-  color: #000000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.main__block {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 6px;
 }
 
 .app__section {
   background-color: #ededed;
 }
 
-.app__section--main {
-  max-width: 640px;
+.app__section__inner {
+  position: relative;
+  flex-grow: 1;
   height: 636px;
-  padding: 38px 18px 37px 16px;
+}
+
+.app__section__inner::after {
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 57px;
+  background: linear-gradient(0deg, #ededed 0%, rgba(237, 237, 237, 0) 164.04%);
+}
+
+.app__section--main {
+  height: 636px;
+  padding: 0 18px 0 16px;
   overflow-y: scroll;
 }
 
 .app__title {
+  margin: 94px 0 30px 0;
   font-weight: 700;
   font-size: 30px;
   line-height: 35px;
   text-align: left;
-  margin: 60px 0 0 0;
 }
 
 .app__subtitle {
@@ -189,20 +215,68 @@ export default {
   line-height: 22px;
 }
 
+.app__list-header {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding: 38px 0 15px 0;
+  background-color: #ededed;
+  z-index: 200;
+}
+
 @media (min-width: 768px) {
+  .app {
+    padding-bottom: 151px;
+  }
+
+  .main__block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    column-gap: 10px;
+    max-width: 1191px;
+    margin: 0 auto;
+  }
+
+  .app__section--main {
+    padding: 0 33px 0 33px;
+  }
+
   .app__title {
+    margin: 126px 0 60px;
     font-size: 45px;
     line-height: 53px;
   }
 
-  .app__section--add {
-    max-width: 518px;
-    padding: 32px 29px 31px 33px;
+  .app__list-header {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .app__subtitle--list {
+    align-self: flex-end;
+    margin-bottom: 0;
   }
 
   .form-add__input-wrapper {
     flex-grow: 1;
     max-width:456px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .main__block {
+    column-gap: 33px;
+  }
+
+  .app__section--main {
+    max-width: 640px;
   }
 }
 </style>

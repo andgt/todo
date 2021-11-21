@@ -35,7 +35,7 @@ export default {
   }
 
   .app__item-title {
-    max-width: 200px;
+    max-width: 60%;
   }
 
   .task__range-field {
@@ -84,7 +84,7 @@ export default {
     background-color: rgba(0, 179, 219, 0.12);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1440px) {
     .app__item-title {
       max-width: 400px;
     }
