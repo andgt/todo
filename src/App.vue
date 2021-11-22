@@ -5,7 +5,7 @@
       <AddTask
         @add-task="addTask"
       />
-      <div class="app__section__inner">
+      <div class="app__section--inner">
         <section class="app__section app__section--main">
           <div class="app__list-header">
             <h2 class="app__subtitle app__subtitle--list">My todos</h2>
@@ -178,13 +178,13 @@ export default {
     background-color: #ededed;
   }
 
-  .app__section__inner {
+  .app__section--inner {
     position: relative;
     flex-grow: 1;
     height: 636px;
   }
 
-  .app__section__inner::after {
+  .app__section--inner::after {
     content: "";
     position: absolute;
     top: auto;
@@ -197,7 +197,7 @@ export default {
 
   .app__section--main {
     height: 636px;
-    padding: 0 18px 0 16px;
+    padding: 0 18px 38px 16px;
     overflow-y: scroll;
     scrollbar-color: #00b3db transparent;
     scrollbar-width: thin;
@@ -276,7 +276,7 @@ export default {
     }
 
     .app__section--main {
-      padding: 0 33px 0 33px;
+      padding: 0 33px 58px 33px;
     }
 
     .app__title {

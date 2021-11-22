@@ -68,7 +68,7 @@ export default {
     height: 28px;
     margin: 0;
     border-radius: 50%;
-    background-color: #ffffff;
+    background-color: #00b3db;
   }
 
   .task__range::-moz-range-thumb {
@@ -80,7 +80,7 @@ export default {
     margin: 0 -3px 0 3px;
     border-radius: 50%;
     border: 0;
-    background-color: #ffffff;
+    background-color: #00b3db;
   }
 
   .task__done {
