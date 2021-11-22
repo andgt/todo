@@ -49,11 +49,13 @@ export default {
   .task__range {
     -moz-appearance: none;
     -webkit-appearance: none;
+    appearance: none;
     width: 66px;
     height: 33px;
     margin: 0;
     padding: 0 3px;
     border-radius: 16.5px;
+    border: 0;
     background-color: #ececec;
     cursor: pointer;
   }
@@ -77,6 +79,7 @@ export default {
     height: 28px;
     margin: 0 -3px 0 3px;
     border-radius: 50%;
+    border: 0;
     background-color: #ffffff;
   }
 
