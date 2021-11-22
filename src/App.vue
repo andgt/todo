@@ -28,6 +28,7 @@
           <DeletedTasks
             v-bind:deleted="deleted"
             v-show="chooseDeleted==='true'"
+            @task-to-active="taskToActive"
           />
         </section>
       </div>
@@ -117,6 +118,15 @@ export default {
 
       localStorage.setItem('deletedLocal', JSON.stringify(this.deleted))
       localStorage.setItem('tasksLocal', JSON.stringify(this.tasks))
+    },
+    taskToActive (del) {
+      del.completed = false
+      console.log(del)
+      this.tasks.push(del)
+      this.deleted = this.deleted.filter(el => el !== del)
+
+      localStorage.setItem('tasksLocal', JSON.stringify(this.tasks))
+      localStorage.setItem('deletedLocal', JSON.stringify(this.deleted))
     },
     addTask (task) {
       task.userId = 1

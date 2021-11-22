@@ -3,8 +3,9 @@
     <ul class="app__list">
       <DeletedItem
         v-for="del of deleted"
-        :key="del.title"
+        :key="del.id"
         v-bind:del="del"
+        v-on:task-to-active="taskToActive"
       />
     </ul>
   </div>
@@ -16,6 +17,11 @@ export default {
   props: ['deleted'],
   components: {
     DeletedItem
+  },
+  methods: {
+    taskToActive (del) {
+      this.$emit('task-to-active', del)
+    }
   }
 }
 </script>
