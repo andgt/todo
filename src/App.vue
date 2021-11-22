@@ -121,7 +121,6 @@ export default {
     },
     taskToActive (del) {
       del.completed = false
-      console.log(del)
       this.tasks.push(del)
       this.deleted = this.deleted.filter(el => el !== del)
 
