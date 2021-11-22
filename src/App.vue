@@ -199,6 +199,8 @@ export default {
     height: 636px;
     padding: 0 18px 0 16px;
     overflow-y: scroll;
+    scrollbar-color: #00b3db transparent;
+    scrollbar-width: thin;
   }
 
   .app__title {
@@ -238,6 +240,7 @@ export default {
   }
 
   .form {
+    display: flex;
     margin: 0 0 auto 0;
     border: 0;
     border-radius: 5px;
@@ -245,6 +248,7 @@ export default {
   }
 
   .form__input-search {
+    flex-grow: 1;
     padding: 12px 20px 14px 27px;
     border: 0;
     border-radius: 5px;

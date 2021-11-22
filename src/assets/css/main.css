@@ -56,18 +56,16 @@ img {
 
 .page,
 .page__body {
-  scrollbar-color: #00b3db;
-  scrollbar-width: none;
+  scrollbar-color: #00b3db transparent;
+  scrollbar-width: thin;
 }
 
-/* полоса прокрутки (скроллбар) */
 ::-webkit-scrollbar,
 .scrollbar {
   width: 4px; /* ширина для вертикального скролла */
   background-color: transparent;
 }
 
-/* ползунок скроллбара */
 ::-webkit-scrollbar-thumb,
 .scrollbar-thumb {
   background-color: #00b3db;

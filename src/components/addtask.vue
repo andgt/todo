@@ -83,6 +83,8 @@ export default {
   .form-add__input-wrapper {
     grid-row: 1/2;
     grid-column: 1/2;
+    display: flex;
+    flex-grow: 1;
   }
 
   .form-add__input {
