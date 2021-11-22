@@ -104,6 +104,11 @@ export default {
     grid-column: 1/2;
     justify-self: end;
     margin-right: 9px;
+    transition: 0.3s ease;
+  }
+
+  .form-add__button:hover {
+    transform: scale(1.02);
   }
 
   @media (min-width: 768px) {

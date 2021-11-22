@@ -2,8 +2,8 @@
 <div>
   <ul class="app__list app__list--tasks">
     <TodoItem
-      v-for="task of tasks"
-      :key="task.title"
+      v-for="task of searchTask"
+      :key="task.id"
       v-bind:task="task"
       v-on:task-to-end="taskToEnd"
     />
@@ -14,7 +14,7 @@
 <script>
 import TodoItem from '@/components/todoitem'
 export default {
-  props: ['tasks'],
+  props: ['searchTask'],
   components: {
     TodoItem
   },
